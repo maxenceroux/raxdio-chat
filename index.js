@@ -3,7 +3,7 @@ const app = express();
 const http = require("http");
 const server = http.createServer(app);
 const { Server } = require("socket.io");
-const io = new Server(server, { cors: { origin: "http://localhost:3000" } });
+const io = new Server(server, { cors: { origin: "http://localhost:3006" } });
 
 io.on("connection", async (socket) => {
   try {
@@ -53,7 +53,7 @@ io.on("connection", async (socket) => {
       second: "2-digit",
       hour12: false,
     };
-    const formattedDate = new Date().toLocaleString(options);
+    const formattedDate = new Date().toLocaleString("en-UK", options);
 
     const formattedMessage = `${username} (${formattedDate}): ${msg}`;
     // io.emit("chat message", formattedMessage);
