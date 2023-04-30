@@ -3,13 +3,14 @@ const app = express();
 const http = require("http");
 const server = http.createServer(app);
 const { Server } = require("socket.io");
-const io = new Server(server, { cors: { origin: "http://localhost:3006" } });
+const io = new Server(server, { cors: { origin: "*", methods:["GET","POST"] } });
 
 io.on("connection", async (socket) => {
+  console.log("user connected")
   try {
     // Retrieve the last 200 messages from the FastAPI server
     const fetch = await import("node-fetch");
-    const response = await fetch.default("http://localhost:8002/messages");
+    const response = await fetch.default("https://raxdio.com/messages");
     const messages = await response.json();
 
     // Emit the messages to the connected user
@@ -65,7 +66,7 @@ io.on("connection", async (socket) => {
     content = msg;
     try {
       const fetch = await import("node-fetch");
-      const response = await fetch.default("http://localhost:8002/message", {
+      const response = await fetch.default("https://raxdio.com/message", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
