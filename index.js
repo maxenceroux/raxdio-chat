@@ -24,6 +24,8 @@ io.on("connection", async (socket) => {
         minute: "2-digit",
         second: "2-digit",
         hour12: false,
+        timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
+
       };
       const formattedDate = new Date(created_at).toLocaleString(
         "en-UK",
@@ -53,6 +55,8 @@ io.on("connection", async (socket) => {
       minute: "2-digit",
       second: "2-digit",
       hour12: false,
+      timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
+
     };
     const formattedDate = new Date().toLocaleString("en-UK", options);
 
